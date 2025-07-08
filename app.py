@@ -7,6 +7,39 @@ st.set_page_config(page_title="Advanced Function Plotter")
 
 st.title("General Function Plotter")
 
+with st.expander("📘 Function Syntax Help (click to expand)"):
+    st.markdown("""
+### ✅ Supported Syntax Examples
+
+| What you mean | What to type |
+|---------------|--------------|
+| Natural log | `log(x)` |
+| Base-10 log | `log10(x)` |
+| Square root | `sqrt(x)` |
+| Reciprocal | `1/x` |
+| Inverse sine | `arcsin(x)` |
+| Inverse cosine | `arccos(x)` |
+| Inverse tangent | `arctan(x)` |
+| Exponentiation | `x^2` or `x**2` |
+| Multiplication | `2x` or `2*x` both work |
+| Multivalued root | `y^2 = x` for ±√x |
+
+---
+
+### ❌ Not Supported (yet)
+
+| Invalid | Instead use |
+|---------|--------------|
+| `ln(x)` | `log(x)` |
+| `sin⁻¹(x)` | `arcsin(x)` |
+| Implicit products like `(x-1)(x+1)` | Write as `(x-1)*(x+1)` (but now handled automatically!) |
+
+---
+
+💡 *Hint*: To get both branches of a multivalued function like `±√x`, write `y^2 = x` instead of `y = sqrt(x)`.
+""")
+
+
 st.markdown("""
 This tool lets you input **any expression involving x and y**, such as:
 - `y = sin(x)`
