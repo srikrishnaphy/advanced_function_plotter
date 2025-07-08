@@ -26,6 +26,10 @@ if x_min >= x_max:
     st.error("x min must be less than x max.")
 else:
     try:
+        # If user entered equation with '=', convert to LHS - RHS = 0 form
+        if "=" in expr_input:
+            lhs_str, rhs_str = expr_input.split("=")
+            expr_input = f"({lhs_str}) - ({rhs_str})"
         x, y = sp.symbols('x y')
         # Parse the equation
         eq = sp.sympify(expr_input)
