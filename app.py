@@ -14,10 +14,8 @@ from sympy.parsing.sympy_parser import (
 
 
 # When parsing:
-eq = parse_expr(expr_input, local_dict=local_dict, transformations=transformations)
-
-#This lets users write:  log(x, e) for natural log  or sin(pi/2) etc.
-
+# eq = parse_expr(expr_input, local_dict=local_dict, transformations=transformations)
+# This lets users write:  log(x, e) for natural log  or sin(pi/2) etc.
 
 st.set_page_config(page_title="Advanced Function Plotter")
 
@@ -61,7 +59,6 @@ with st.expander("📘 Function Syntax Help (click to expand)"):
 💡 *Hint*: To get both branches of a multivalued function like `±√x`, write `y^2 = x` instead of `y = sqrt(x)`.
 """)
 
-
 st.markdown("""
 This tool lets you input **any expression involving x and y**, such as:
 - `y = sin(x)`
@@ -85,9 +82,18 @@ else:
         if "=" in expr_input:
             lhs_str, rhs_str = expr_input.split("=")
             expr_input = f"({lhs_str}) - ({rhs_str})"
+
+        # Replace alternative symbols
+        expr_input = expr_input.replace("ln(", "log(").replace("π", "pi").replace("ℯ", "e")
+
         x, y = sp.symbols('x y')
+
+        # Setup for parse_expr
+        local_dict = {'e': E, 'pi': pi}
+        transformations = standard_transformations + (implicit_multiplication_application, convert_xor)
+
         # Parse the equation
-        eq = sp.sympify(expr_input)
+        eq = parse_expr(expr_input, local_dict=local_dict, transformations=transformations)
 
         # Rearranged equation for solving y
         sol_y = sp.solve(eq, y)
@@ -119,3 +125,4 @@ else:
 
     except Exception as e:
         st.error(f"Invalid input or parsing error: {e}")
+
