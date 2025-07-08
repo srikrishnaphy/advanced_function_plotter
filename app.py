@@ -65,6 +65,7 @@ This tool lets you input **any expression involving x and y**, such as:
 - `y^2 = sin(x)`
 - `y = sqrt(x^2 + 1)`
 - `y^3 - y = x`
+- `y^2 = arctan(x) *1/x + log(x,e) + sin(x^2)`
 """)
 
 expr_input = st.text_input("Enter your equation (use `x` and `y`) :", "y^2 = sin(x)")
