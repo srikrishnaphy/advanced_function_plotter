@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 import sympy as sp
 from sympy import E, pi
 
+from sympy.parsing.sympy_parser import (
+    parse_expr,
+    standard_transformations,
+    implicit_multiplication_application,
+    convert_xor,
+)
+
 local_dict = {
     'e': E,
     'pi': pi,
