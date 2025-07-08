@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import sympy as sp
 from sympy import E, pi
 
+# Advanced parsing tools from SymPy
 from sympy.parsing.sympy_parser import (
     parse_expr,
     standard_transformations,
@@ -11,10 +12,6 @@ from sympy.parsing.sympy_parser import (
     convert_xor,
 )
 
-local_dict = {
-    'e': E,
-    'pi': pi,
-}
 
 # When parsing:
 eq = parse_expr(expr_input, local_dict=local_dict, transformations=transformations)
