@@ -2,6 +2,18 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sp
+from sympy import E, pi
+
+local_dict = {
+    'e': E,
+    'pi': pi,
+}
+
+# When parsing:
+eq = parse_expr(expr_input, local_dict=local_dict, transformations=transformations)
+
+#This lets users write:  log(x, e) for natural log  or sin(pi/2) etc.
+
 
 st.set_page_config(page_title="Advanced Function Plotter")
 
@@ -13,16 +25,24 @@ with st.expander("📘 Function Syntax Help (click to expand)"):
 
 | What you mean | What to type |
 |---------------|--------------|
-| Natural log | `log(x)` |
-| Base-10 log | `log10(x)` |
+| Natural log | `log(x)` or `log(x, e)` |
+| Base-10 log | `log(x, 10)` or `log10(x)` |
 | Square root | `sqrt(x)` |
 | Reciprocal | `1/x` |
 | Inverse sine | `arcsin(x)` |
 | Inverse cosine | `arccos(x)` |
 | Inverse tangent | `arctan(x)` |
 | Exponentiation | `x^2` or `x**2` |
-| Multiplication | `2x` or `2*x` both work |
+| Implicit multiplication | `2x` or `(x-1)(x+1)x` |
 | Multivalued root | `y^2 = x` for ±√x |
+| Use constants | `pi`, `e` |
+
+---
+
+### 💡 Notes:
+- `log(x, a)` gives log base `a` — e.g. `log(x, 2)` is log base 2.
+- Use `log(x, e)` for natural logarithm (`ln(x)`).
+- `e` ≈ 2.718 and `pi` ≈ 3.141 are recognized symbols.
 
 ---
 
@@ -30,11 +50,9 @@ with st.expander("📘 Function Syntax Help (click to expand)"):
 
 | Invalid | Instead use |
 |---------|--------------|
-| `ln(x)` | `log(x)` |
+| `ln(x)` | `log(x)` or `log(x, e)` |
 | `sin⁻¹(x)` | `arcsin(x)` |
-| Implicit products like `(x-1)(x+1)` | Write as `(x-1)*(x+1)` (but now handled automatically!) |
-
----
+| `π` or `ℯ` | Use `pi` or `e` |
 
 💡 *Hint*: To get both branches of a multivalued function like `±√x`, write `y^2 = x` instead of `y = sqrt(x)`.
 """)
