@@ -89,7 +89,34 @@ else:
         x, y = sp.symbols('x y')
 
         # Setup for parse_expr
-        local_dict = {'e': E, 'pi': pi}
+        local_dict = {
+    'e': E,
+    'pi': pi,
+    'sin': sp.sin,
+    'cos': sp.cos,
+    'tan': sp.tan,
+    'sec': sp.sec,
+    'csc': sp.csc,      # Use csc instead of cosec
+    'cot': sp.cot,
+
+    'arcsin': sp.asin,
+    'arccos': sp.acos,
+    'arctan': sp.atan,
+
+    'sinh': sp.sinh,
+    'cosh': sp.cosh,
+    'tanh': sp.tanh,
+    'arcsinh': sp.asinh,
+    'arccosh': sp.acosh,
+    'arctanh': sp.atanh,
+
+    'log': sp.log,
+    'log10': sp.log,
+    'sqrt': sp.sqrt,
+    'abs': sp.Abs,
+    'exp': sp.exp,
+}
+
         transformations = standard_transformations + (implicit_multiplication_application, convert_xor)
 
         # Parse the equation
