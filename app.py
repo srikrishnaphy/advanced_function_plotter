@@ -68,6 +68,11 @@ This tool lets you input **any expression involving x and y**, such as:
 """)
 
 expr_input = st.text_input("Enter your equation (use `x` and `y`) :", "y^2 = sin(x)")
+expr_input_raw = expr_input  # Save original for the plot title while displaying
+
+
+
+
 
 x_min = st.number_input("x min", value=-10.0)
 x_max = st.number_input("x max", value=10.0)
@@ -142,12 +147,13 @@ else:
                     ax.plot(x_vals, y_vals, label=f"y = {sp.pretty(sol)}")
                 except Exception as e:
                     st.warning(f"Could not evaluate expression: {sol}")
-
-            ax.set_title(f"Plot of: {expr_input}")
+            
+            
+            ax.set_title(f"Plot of: {expr_input_raw}")
             ax.set_xlabel("x")
             ax.set_ylabel("y")
             ax.grid(True)
-            ax.legend()
+            #ax.legend()
             st.pyplot(fig)
 
     except Exception as e:
